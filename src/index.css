@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+  .twitter-tweet {
+    width: 100%; 
+    height: 100%; /* Or any specific height */
+    max-height: 14rem; /* Limit height */
+    max-width: 18rem; /* Limit width */
+    overflow: hidden; /* Ensures no overflow */
+  }
+
+  .object-cover {
+    object-fit: contain; /* Adjust how content fits */
+  }
+
