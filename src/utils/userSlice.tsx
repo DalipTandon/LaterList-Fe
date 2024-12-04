@@ -8,9 +8,13 @@ const userSlice=createSlice({
         //@ts-ignore
         addUser:(state,action)=>{
             return action.payload;
+        },
+         //@ts-ignore
+        removeUser:()=>{
+            return null;
         }
     }
 })
 
-export const{addUser}=userSlice.actions;
+export const{addUser,removeUser}=userSlice.actions;
 export default userSlice.reducer;
