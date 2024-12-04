@@ -11,7 +11,7 @@ const Login=()=>{
     const[password,setPassword]=useState("Dalip@123");
     const[isNewUser,setIsNewUser]=useState(true);
     const[errorMessage,setErrorMessage]=useState("");
-    const[error,setshowError]=useState(false);
+    const[error,setshowError]=useState(true);
     const[signupError,setSignupError]=useState("");
       const dispatch=useDispatch();
       const navigate=useNavigate();
@@ -52,7 +52,7 @@ const Login=()=>{
     return(
         <div className=" h-screen flex items-center justify-center ">
             <div className="bg-gray-100 p-6 rounded-lg shadow-lg w-1/3  ">
-            {isNewUser ? <h3 className="text-center text-xl font-mono  ">Create a new account</h3> :  <h3 className="text-center text-xl font-mono  ">Signin !</h3>}
+            {isNewUser ?  <h3 className="text-center text-xl font-mono  ">Signin !</h3>:<h3 className="text-center text-xl font-mono  ">Create a new account</h3> }
               <div className="my-4">
               <input
                 type="text"
@@ -70,8 +70,8 @@ const Login=()=>{
                 onChange={(e)=>setPassword(e.target.value)}
               />
               { error && <h6 className="text-sm text-red-500 text-center ">{signupError}</h6>}
-            { isNewUser ?  <button onClick={handleLogin} className="mt-4 p-2 border bg-blue-500 text-white rounded-lg w-1/2 mx-24 hover:scale-95">Login</button>:<button onClick={handleSignin} className="mt-4 p-2 border bg-blue-500 text-white rounded-lg w-1/2 mx-24 hover:scale-95">SignIn</button>}
-               <h5 onClick={()=>setIsNewUser(false)} className="text-center font-mono text-blue-600 cursor-pointer ">already have an account?click here</h5>
+            { isNewUser ? <button onClick={handleSignin} className="mt-4 p-2 border bg-blue-500 text-white rounded-lg w-1/2 mx-24 hover:scale-95">SignIn</button>: <button onClick={handleLogin} className="mt-4 p-2 border bg-blue-500 text-white rounded-lg w-1/2 mx-24 hover:scale-95">Login</button>}
+               <h5 onClick={()=>setIsNewUser(false)} className="text-center font-mono text-blue-600 cursor-pointer ">New User?click here</h5>
               </div>
             </div>
         </div>
