@@ -1,6 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BASE_URL } from "../utils/config";
+import { useDispatch } from "react-redux";
+import { addContent } from "../utils/contentSlice";
 
 
 const AddContent=()=>{
@@ -9,18 +11,15 @@ const AddContent=()=>{
     const[link,setLink]=useState("");
     const[title,setTitle]=useState("");
     const[tags,setTas]=useState("");
-
+    const dispatch=useDispatch();
     const contentData=async()=>{
-        const res=await axios.post(BASE_URL+"/content//v1/content",{
+        const res=await axios.post(BASE_URL+"/content/v1/content",{
             type,link,title,tags
         },{withCredentials:true})
-        console.log(res.data);
-        
+        // console.log(res.data);
+        dispatch(addContent(res.data.data))
+        setIsModalOpen(false);
     }
-
-    useEffect(()=>{
-        contentData();
-    })
 
     const handleAddContent=()=>{
         setIsModalOpen(true);

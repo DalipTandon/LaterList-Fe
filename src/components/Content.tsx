@@ -1,31 +1,27 @@
 import axios from "axios";
 import ContentCard from "./ContentCard";
 import { BASE_URL } from "../utils/config";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { addContent } from "../utils/contentSlice";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 
 const Content=()=>{
-    const dispatch=useDispatch();
-    //@ts-ignore
-    const Feedcontent=useSelector((store)=>store.content)
+    const[content,setContent]=useState([]);
     const contentData=async()=>{
         const res=await axios.get(BASE_URL+"/content/v1/content",{withCredentials:true})
-        //@ts-ignore
-        const data=res.data.data;
-        dispatch(addContent(res.data.data));
-        // console.log(data);
+        if(res.data&&res.data.data){
+        setContent(res.data.data);
+        }
     }
 
     useEffect(()=>{
         contentData();
     },[])
     return(
-        Feedcontent&&
+        content.length===0?(
+            <h1 className="text-center my-36 text-2xl  ">No Watch later links available</h1>
+        ):
         (<div className="flex gap-2 flex-wrap">
-            {Feedcontent.map((feedData:any)=> <ContentCard feed={feedData} key={feedData._id}/>)}
+            {content.map((feedData:any)=> <ContentCard feed={feedData} key={feedData._id}/>)}
         </div>)
     )
 }
