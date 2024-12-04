@@ -35,7 +35,7 @@ const ContentCard=({feed}:any)=>{
          <a href={link.replace("x.com","twitter.com")}></a> 
        </blockquote></div>}
             <span className="block my-4">Added on  {formattedDate}</span>
-            <span className="mt-2 bg-[#EDF1FE]">{renderHashtags(tags)}</span>
+            <span className="mt-2 ">{renderHashtags(tags)}</span>
         </div>
         </>
     )
