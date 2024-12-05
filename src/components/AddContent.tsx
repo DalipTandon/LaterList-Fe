@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import {  useState } from "react";
 import { BASE_URL } from "../utils/config";
 import { useDispatch } from "react-redux";
 import { addContent } from "../utils/contentSlice";
@@ -12,14 +12,16 @@ const AddContent=()=>{
     const[title,setTitle]=useState("");
     const[tags,setTas]=useState("");
     const dispatch=useDispatch();
+    //@ts-ignore
     const contentData=async()=>{
         const res=await axios.post(BASE_URL+"/content/v1/content",{
             type,link,title,tags
         },{withCredentials:true})
         // console.log(res.data);
-        dispatch(addContent(res.data.data))
+        dispatch(addContent(res.data))
         setIsModalOpen(false);
     }
+    
 
     const handleAddContent=()=>{
         setIsModalOpen(true);
@@ -74,6 +76,7 @@ const AddContent=()=>{
                 </button>
                 <button onClick={contentData} type="submit" className="p-2 border bg-blue-500 text-white rounded-lg">
                   Submit
+                 
                 </button>
               </div>
             </div>
