@@ -1,8 +1,20 @@
+import axios from "axios";
+import { BASE_URL } from "../utils/config";
+import { useDispatch } from "react-redux";
+import { removeContent } from "../utils/contentSlice";
 
 
 const ContentCard=({feed}:any)=>{
-    const{title,tags,createdAt,link,type}=feed
-    // console.log(title);
+  const dispatch=useDispatch();
+    const{title,tags,createdAt,link,type,_id}=feed
+    //console.log(_id);
+
+   const removeFeedContent=async(contentId:string)=>{
+    const res=await axios.delete(BASE_URL+"/content/v1/content/"+contentId,{withCredentials:true});
+    dispatch(removeContent(contentId));
+   }
+
+
     const renderHashtags = (tags: string[] | undefined) => {
         return tags?.map((tag, index) => (
           <span
@@ -29,7 +41,7 @@ const ContentCard=({feed}:any)=>{
     return (
         <>
         <div className=" shadow-lg w-80 h-96 my-6 p-2 mx-5 border border-gray-200 hover:scale-105 rounded-lg">
-            <span className="text-lg ">{title}<i className="ri-share-line mx-1"><i className="ri-delete-bin-6-line mx-1"></i></i></span>
+            <span className="text-lg ">{title}<i className="ri-share-line mx-1"><i onClick={()=>removeFeedContent(_id)} className="ri-delete-bin-6-line p-2 mx-1 hover:bg-red-500"></i></i></span>
            {type==="video" && <div className="my-6 h-fit "><iframe height="188px" className="object-contain rounded-md" src={link.replace("watch","embed").replace("?v=","/")} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe></div>}
            {type==="article" && <div className="my-6 h-56"><blockquote className="twitter-tweet object-cover ">
          <a href={link.replace("x.com","twitter.com")}></a> 

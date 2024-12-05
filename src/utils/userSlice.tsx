@@ -5,6 +5,7 @@ const userSlice = createSlice({
     //@ts-ignore
     initialState: JSON.parse(localStorage.getItem("user")) || null, 
     reducers: {
+        //@ts-ignore
         addUser: (state, action) => {
             const user = action.payload;
             localStorage.setItem("user", JSON.stringify(user)); 
