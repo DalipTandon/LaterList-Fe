@@ -10,9 +10,10 @@ const ContentCard=({feed}:any)=>{
     //console.log(_id);
 
    const removeFeedContent=async(contentId:string)=>{
-    //@ts-ignore
     const res=await axios.delete(BASE_URL+"/content/v1/content/"+contentId,{withCredentials:true});
     dispatch(removeContent(contentId));
+    console.log("content removed");
+    
    }
 
 

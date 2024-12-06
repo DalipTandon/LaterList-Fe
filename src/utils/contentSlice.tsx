@@ -1,16 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface Content {
+    _id: string;
+    title: string;
+    type: string;
+    link?: string;
+    tags?: string[];
+    createdAt?: string;
+  }
+  type ContentState = Content[];
 
 const contentSlice=createSlice({
     name:"content",
-    initialState:[],
+    initialState:[]as ContentState,
     reducers:{
-      //  @ts-ignore
         addContent:(state,action)=>{
-            return action.payload;
+          //  console.log("Payload ", action.payload);
+            const payload = Array.isArray(action.payload) ? action.payload : [action.payload];
+            state.push(...payload);            
         },
         removeContent: (state, action) => {
-            //@ts-ignore
             return state.filter((content) => content._id !== action.payload);
         },
     }

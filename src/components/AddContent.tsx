@@ -70,11 +70,11 @@ const AddContent=()=>{
                 <button
                   onClick={handleCloseModal}
                   type="button"
-                  className="p-2 border bg-gray-300 rounded-lg mx-2"
+                  className="p-2 border bg-gray-300 rounded-lg mx-2 hover:scale-90"
                 >
                   Cancel
                 </button>
-                <button onClick={contentData} type="submit" className="p-2 border bg-blue-500 text-white rounded-lg">
+                <button onClick={contentData} type="submit" className="p-2 border bg-blue-500 text-white rounded-lg hover:scale-90">
                   Submit
                  
                 </button>

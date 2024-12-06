@@ -6,8 +6,9 @@ import { useSelector } from "react-redux";
 
 
 const Content=()=>{
-    const[content,setContent]=useState([]);
     const feedData=useSelector((store:any)=>store.content)||[];
+    const[content,setContent]=useState(feedData);
+   // console.log(feedData);
     
     const contentData=async()=>{
         try {
@@ -20,11 +21,9 @@ const Content=()=>{
         }
     }
     useEffect(() => {
-        if (feedData &&feedData.length > 0) {
-            setContent(feedData);
-        }else{
+        
             contentData();
-        }
+        
     }, [feedData]); 
     
 
