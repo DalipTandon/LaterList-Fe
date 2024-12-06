@@ -5,7 +5,7 @@ import { BASE_URL } from "../utils/config";
 import { useDispatch } from "react-redux";
 import { removeUser } from "../utils/userSlice";
 
-const Sidebar=()=>{
+const Sidebar=({ setFilter }: { setFilter: (type: string) => void })=>{
     const dispatch=useDispatch();
     const navigate=useNavigate();
     const handleLogout=async()=>{
@@ -22,8 +22,9 @@ const Sidebar=()=>{
             <Link to={"/"} className="text-3xl mt-3 mx-2 font-mono">LaterList</Link>
             </div>
             <div className=" h-fit mt-14 p-4 mx-8">
-                <button className="block my-4 text-xl p-2 cursor-pointer hover:bg-blue-100 rounded-lg"><i className="ri-twitter-line mx-2"></i>Tweet</button>
-                <button className="block my-4 text-xl cursor-pointer p-2 hover:bg-blue-100 rounded-lg"><i className="ri-tv-2-line mx-2"></i>videos</button>
+                  <button onClick={() => setFilter("")} className="block text-xl my-4 cursor-pointer p-2 hover:bg-blue-100 rounded-lg"><i className="ri-links-line mx-2"></i>All Links</button>
+                <button  onClick={() => setFilter("article")} className="block my-4 text-xl p-2 cursor-pointer hover:bg-blue-100 rounded-lg"><i className="ri-twitter-line mx-2"></i>Tweet</button>
+                <button  onClick={() => setFilter("video")} className="block my-4 text-xl cursor-pointer p-2 hover:bg-blue-100 rounded-lg"><i className="ri-tv-2-line mx-2"></i>videos</button>
                 <button className="block my-4 text-xl cursor-pointer p-2 hover:bg-blue-100 rounded-lg"><i className="ri-article-line mx-2"></i>Documents</button>
                 <button className="block text-xl my-4 cursor-pointer p-2 hover:bg-blue-100 rounded-lg"><i className="ri-links-line mx-2"></i>Links</button>
                 <button onClick={()=>handleLogout()} className="block text-xl mx-2 cursor-pointer p-2 hover:bg-blue-100 rounded-lg">Logout</button>

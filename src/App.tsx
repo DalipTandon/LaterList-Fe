@@ -6,8 +6,11 @@ import Login from "./components/Login";
 import appStore from "./utils/appStore";
 import Intro from "./components/Intro";
 import SharedContent from "./components/SharedContent";
+import { useState } from "react";
 
 function App() {
+  const [filter, setFilter] = useState<string>("");
+
   return (
     <Provider store={appStore}>
       <BrowserRouter>
@@ -20,8 +23,8 @@ function App() {
             path="/laterList"
             element={
               <div className="flex">
-                <Sidebar />
-                <Main />
+                <Sidebar setFilter={setFilter} />
+                <Main filter={filter} />
               </div>
             }
           />

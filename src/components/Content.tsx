@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 
-const Content=()=>{
+const Content=({ filter }: { filter: string })=>{
     const feedData=useSelector((store:any)=>store.content)||[];
     const[content,setContent]=useState(feedData);
    // console.log(feedData);
@@ -26,14 +26,16 @@ const Content=()=>{
         
     }, [feedData]); 
     
-
+    const filteredContent = filter
+    ? content.filter((item: any) => item.type === filter)
+    : content;
 
     return(
-        content.length===0?(
+        filteredContent.length===0?(
             <h1 className="text-center my-36 text-2xl  ">No Watch later links available</h1>
         ):
         (<div className="flex gap-2 flex-wrap">
-            {content.map((feedData:any)=> <ContentCard feed={feedData} key={feedData._id}/>)}
+            {filteredContent.map((feedData:any)=> <ContentCard feed={feedData} key={feedData._id}/>)}
         </div>)
     )
 }
